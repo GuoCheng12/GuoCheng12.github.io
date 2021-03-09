@@ -6,15 +6,26 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>数据结构 ---- 栈 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="** 《数据结构》 ———— 栈与队列 （1）** 栈：一种特殊的线性表，其只允许在固定的一端进行插入和删除元素操作。进行数据插入和删除操作的一端称为栈顶，另一端称为栈底。栈中的数据元素遵守后进先出LIFO（Last In First Out）的原则。 如图： 进栈过程：出栈过程其实栈是本人认为最简单的一种线性表，记住LIFO （后进先出）这一原则就很好掌握~ 这里有一道题让各位更好理解  栈 一">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构 ---- 栈">
+<meta property="og:url" content="http://example.com/2021/03/09/%E6%A0%88/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="** 《数据结构》 ———— 栈与队列 （1）** 栈：一种特殊的线性表，其只允许在固定的一端进行插入和删除元素操作。进行数据插入和删除操作的一端称为栈顶，另一端称为栈底。栈中的数据元素遵守后进先出LIFO（Last In First Out）的原则。 如图： 进栈过程：出栈过程其实栈是本人认为最简单的一种线性表，记住LIFO （后进先出）这一原则就很好掌握~ 这里有一道题让各位更好理解  栈 一">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309170912218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309171503754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309173023855.png">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309173158703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20210309174751630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70">
+<meta property="article:published_time" content="2021-03-09T09:55:00.000Z">
+<meta property="article:modified_time" content="2021-03-09T10:15:19.849Z">
 <meta property="article:author" content="John Doe">
+<meta property="article:tag" content="数据结构">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://img-blog.csdnimg.cn/20210309170912218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -142,16 +153,14 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-    <article id="post-栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+            <article id="post-栈" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/09/%E6%A0%88/">数据结构 ---- 栈</a>
+    <h1 class="article-title" itemprop="name">
+      数据结构 ---- 栈
     </h1>
   
 
@@ -194,6 +203,27 @@
       
 
       
+        <div class="page-reward">
+          <a href="javascript:;" class="page-reward-btn tooltip-top">
+            <div class="tooltip tooltip-east">
+            <span class="tooltip-item">
+              赏
+            </span>
+            <span class="tooltip-content">
+              <span class="tooltip-text">
+                <span class="tooltip-inner">
+                  <p class="reward-p"><i class="icon icon-quo-left"></i>谢谢你请我吃糖果<i class="icon icon-quo-right"></i></p>
+                  <div class="reward-box">
+                    
+                    
+                  </div>
+                </span>
+              </span>
+            </span>
+          </div>
+          </a>
+        </div>
+      
     </div>
     <div class="article-info article-info-index">
       
@@ -212,16 +242,75 @@
       
 
       
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/09/%E6%A0%88/">展开全文 >></a>
-        </p>
-      
 
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
+        </div>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//pan.baidu.com/share/qrcode?url=http://example.com/2021/03/09/%E6%A0%88/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
       
       <div class="clearfix"></div>
     </div>
   </div>
 </article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">我的第一篇博客(自我介绍)</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
 
 <aside class="wrap-side-operation">
     <div class="mod-side-operation">
@@ -241,108 +330,14 @@
 
 
 
-
   
-    <article id="post-我的第一篇博客-自我介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">我的第一篇博客(自我介绍)</a>
-    </h1>
   
 
-        
-        <a href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
-  	<time datetime="2021-03-09T05:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-09</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="我的第一篇博客-其实是自我介绍来的"><a href="#我的第一篇博客-其实是自我介绍来的" class="headerlink" title="我的第一篇博客  其实是自我介绍来的~"></a>我的第一篇博客  其实是自我介绍来的~</h2><h4 id="大家好，欢迎来到我的博客！"><a href="#大家好，欢迎来到我的博客！" class="headerlink" title="大家好，欢迎来到我的博客！"></a>大家好，欢迎来到我的博客！</h4><pre><code>  先自我介绍一下
-    本人现在就读于北京工业大学软件工程系
-                    是一名大一新生
-        称呼嘛。。
-       叫我JOE就好啦~因为这个英文名也一直从小伴随至今
-    
-    从小学起，计算机就一直影响我至今，所以也从很小起就目标很明确
-    不管将来怎么走，肯定是离不开计算机的！（嗯！
-    
-    成长的道路上，当然也缺少不了像各位一样的陪跑者，所以十分感谢各位的光顾~
-    欸。。未来吗
-        说实话现在很难想象自己的未来，考研或者直接工作可能对我来说都是不错的选择。。（废话
-        毕竟可能我还是个小屁孩吧，懂的东西也还只是一些皮毛
-        当然啦~还是可以做做梦的，做梦谁不会呢？
-    考研的话，我可能会偏向于出国~又或者回到自己的家乡台湾继续深造也没准
-    工作的话，BAT,字节跳动美团QAQ都是不知道多少人的梦想吧，至于岗位。。这个。。
-    梦想嘛梦想嘛。。研发人员还是不会去想的，比起那个我还更想去云计算啊，全栈程序员之类的！~
-</code></pre>
-<h4 id="哈哈哈哈-就此打住-做梦总是让人一下子沉浸"><a href="#哈哈哈哈-就此打住-做梦总是让人一下子沉浸" class="headerlink" title="哈哈哈哈   就此打住   做梦总是让人一下子沉浸"></a>哈哈哈哈   就此打住   做梦总是让人一下子沉浸</h4><pre><code>    回到主题
-    创建这篇博客的目的性其实最重要是为了自己，毕竟我觉得
-      博客+GitHub 也算是现在程序员行走的名片了吧
-     当然还是为了能丰富自己的能力，与各位交流
-          互相批评 改正  才能有更大的进步！
-                             wwww~
-
-        PS:        博客使用Hexo框架搭建  QAQ穷租不起服务器所以就搭建在Git上面了~
-</code></pre>
-<h4 id="同时也用到了大神Yilia的themes-还是很好看的哈哈哈"><a href="#同时也用到了大神Yilia的themes-还是很好看的哈哈哈" class="headerlink" title="同时也用到了大神Yilia的themes~还是很好看的哈哈哈"></a>同时也用到了大神Yilia的themes~还是很好看的哈哈哈</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-	<div class="article-category tagcloud">
-		<i class="icon-book icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="/categories/index//" class="article-tag-list-link color1">index</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
+  
 
   
+
   
 
 
@@ -365,8 +360,8 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

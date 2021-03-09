@@ -6,11 +6,11 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://example.com">
-  <title>Hexo</title>
+  <title>Category: index | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
 <meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+<meta property="og:url" content="http://example.com/categories/index/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="John Doe">
@@ -144,161 +144,35 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-栈" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/09/%E6%A0%88/">数据结构 ---- 栈</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/09/%E6%A0%88/" class="archive-article-date">
-  	<time datetime="2021-03-09T09:55:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-09</time>
-</a>
-        
-      </header>
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>**</p>
-<h2 id="《数据结构》-————-栈与队列-（1）"><a href="#《数据结构》-————-栈与队列-（1）" class="headerlink" title="《数据结构》 ———— 栈与队列 （1）"></a>《数据结构》 ———— 栈与队列 （1）</h2><p>**</p>
-<p>栈：一种特殊的线性表，其只允许在固定的一端进行插入和删除元素操作。进行数据插入和删除操作的一端<br>称为栈顶，另一端称为栈底。栈中的数据元素遵守后进先出LIFO（Last In First Out）的原则。</p>
-<p>如图：</p>
-<p><strong>进栈过程：</strong><br><img src="https://img-blog.csdnimg.cn/20210309170912218.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>出栈过程</strong><br><img src="https://img-blog.csdnimg.cn/20210309171503754.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>其实栈是本人认为最简单的一种线性表，记住<strong>LIFO</strong> （后进先出）这一原则<br>就很好掌握~</p>
-<p>这里有一道题让各位更好理解  <em><strong>栈</strong></em></p>
-<p><strong>一个栈的初始状态为空。现将元素1、2、3、4、5、A、B、C、D、E依次入栈，然后再依次出栈，则元素出栈的<br>顺序是（ ）。<br>A 12345ABCDE<br>B EDCBA54321<br>C ABCDE12345<br>D 54321EDCBA</strong></p>
-<p>仔细想想~ 答案是：B<br>这题很简单，看到<strong>依次</strong>的字眼不难想到正确答案</p>
-<p>还有一题稍微要想一下</p>
-<p><strong>若进栈序列为 1,2,3,4 ，进栈过程中可以出栈，则下列不可能的一个出栈序列是（）<br>A 1,4,3,2<br>B 2,3,4,1<br>C 3,1,4,2<br>D 3,4,2,1</strong></p>
-<p>答案是：C<br>提示：元素是可以<strong>进栈</strong>后立马<strong>出栈</strong>的~想明白了吗？</p>
-<h2 id="接下来，来看看怎么实现栈吧："><a href="#接下来，来看看怎么实现栈吧：" class="headerlink" title="接下来，来看看怎么实现栈吧："></a>接下来，来看看怎么实现栈吧：</h2><p>实现线性表一般可以用到数组和链表，这是两个比较流行的实现方式。<br>这里引用一句出自马克·艾伦·维斯的《数据结构与算法分析》里面的一句话<br><strong>”如果使用好的编程原则，那么调用例程不必知道使用的是哪种方法“</strong></p>
-<p>不过。。个人听了很多大佬的建议，都推荐使用数组来实现栈。<br>原因嘛，简单啊！数组出入数据还不简单吗？！<br>当然，数组还是有缺点的，随时随地要面临要扩容，有时候可能会遇到空间浪费等的问题。</p>
-<p><strong>数组：</strong><br><img src="https://img-blog.csdnimg.cn/20210309173023855.png" alt="在这里插入图片描述"><br><strong>当然链表也可以实现，当然我更推荐双链表：</strong></p>
-<p><img src="https://img-blog.csdnimg.cn/20210309173158703.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
-<p>说了那么多，咱们还是得创建一个项目来看看嘛！<br>头文件：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此处为 .h文件</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> once</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;assert.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> ElementType;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Stack</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">	ElementType* _a;<span class="comment">//前_：表示成员</span></span><br><span class="line">	<span class="keyword">int</span> _top; <span class="comment">//栈顶下标</span></span><br><span class="line">	<span class="keyword">int</span> _capacity;</span><br><span class="line"></span><br><span class="line">&#125;Stack;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackInit</span><span class="params">(Stack* pst)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackDestory</span><span class="params">(Stack* pst)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackPush</span><span class="params">(Stack* pst, ElementType x)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackPop</span><span class="params">(Stack* pst)</span></span>;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StackSize</span><span class="params">(Stack* pst)</span></span>;</span><br><span class="line"><span class="comment">//返回1是空，返回0是非空</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StackEmpty</span><span class="params">(Stack* pst)</span></span>;</span><br><span class="line"><span class="function">ElementType <span class="title">StackTop</span><span class="params">(Stack* pst)</span></span>;<span class="comment">//返回栈</span></span><br></pre></td></tr></table></figure>
-<p>函数实现：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此处为 函数实现 .c文件</span></span><br><span class="line"><span class="comment">//今儿又是活力满满的一天呢~</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Stack_.h&quot;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackInit</span><span class="params">(Stack* pst)</span><span class="comment">// 初始化栈</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line"></span><br><span class="line">	pst-&gt;_a = <span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(ElementType)*<span class="number">4</span>);</span><br><span class="line">	pst-&gt;_top = <span class="number">0</span>;</span><br><span class="line">	pst-&gt;_capacity = <span class="number">4</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackDestroy</span><span class="params">(Stack* pst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line">	<span class="built_in">free</span>(pst-&gt;_a);</span><br><span class="line">	pst-&gt;_a = <span class="literal">NULL</span>;</span><br><span class="line">	pst-&gt;_top = pst-&gt;_capacity = <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackPush</span><span class="params">(Stack* pst, ElementType x)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> (pst-&gt;_top == pst-&gt;_capacity)</span><br><span class="line">	&#123;</span><br><span class="line">		pst-&gt;_capacity *= <span class="number">2</span>;</span><br><span class="line">		ElementType* tmp = (ElementType*)<span class="built_in">realloc</span>(pst-&gt;_a, <span class="keyword">sizeof</span>(ElementType)*pst-&gt;_capacity);</span><br><span class="line">		<span class="keyword">if</span> (tmp == <span class="literal">NULL</span>)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="built_in">printf</span>(<span class="string">&quot;Wrong!&quot;</span>);</span><br><span class="line">			<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span></span><br><span class="line">		&#123;</span><br><span class="line">			pst-&gt;_a = tmp;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	pst-&gt;_a[pst-&gt;_top] = x;</span><br><span class="line">	pst-&gt;_top++;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">StackPop</span><span class="params">(Stack* pst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line">	assert(pst-&gt;_top &gt; <span class="number">0</span>);</span><br><span class="line">	--pst-&gt;_top;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StackSize</span><span class="params">(Stack* pst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line">	<span class="keyword">return</span> pst-&gt;_top;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">StackEmpty</span><span class="params">(Stack* pst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> pst-&gt;_top == <span class="number">0</span> ? <span class="number">1</span> : <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">ElementType <span class="title">StackTop</span><span class="params">(Stack* pst)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	assert(pst);</span><br><span class="line">	assert(pst-&gt;_top &gt; <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> pst-&gt;_a[pst-&gt;_top - <span class="number">1</span>];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>最终实现：（本例子：将1234入栈后，依次打印栈顶并出栈）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//此处为test.c 用来放main函数</span></span><br><span class="line"><span class="comment">//今儿又是活力满满的一天呢~</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> _CRT_SECURE_NO_WARNINGS 1</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;Stack_.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">TestStack</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	Stack st;</span><br><span class="line">	StackInit(&amp;st);</span><br><span class="line">	StackPush(&amp;st, <span class="number">1</span>);</span><br><span class="line">	StackPush(&amp;st, <span class="number">2</span>);</span><br><span class="line">	StackPush(&amp;st, <span class="number">3</span>);</span><br><span class="line">	StackPush(&amp;st, <span class="number">4</span>);</span><br><span class="line">	<span class="keyword">while</span> (!StackEmpty(&amp;st))</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">&quot; %d&quot;</span>, StackTop(&amp;st));</span><br><span class="line">		StackPop(&amp;st);</span><br><span class="line">	&#125;</span><br><span class="line">	StackDestroy(&amp;st);</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">		TestStack();</span><br><span class="line">		<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<p>代码最终实现结果如下：<br><img src="https://img-blog.csdnimg.cn/20210309174751630.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L20wXzUwOTg2MzQy,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br><strong>栈的应用</strong></p>
-<p>对不起！本人暂时还没有利用栈做出什么名堂QAQ，但是本人上次在蓝桥杯的模拟试题上看到过一道 <strong>”迷宫问题“</strong><br>那篇blog运用的就是栈，来最后得到了答案。</p>
-<p>欸。。再给我点时间，我一定专门做一篇blog来讲述栈的应用！在这先挖一个坑吧，也给自已一点动力哈哈哈哈~</p>
-<p>感谢大家看到这，下一篇打算讲讲<strong>队列</strong>！</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
+    
       
       
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">数据结构</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/09/%E6%A0%88/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
+      <section class="archives-wrap">
+        <div class="archive-year-wrap">
+          <a href="/archives/2021" class="archive-year">2021</a>
         </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-我的第一篇博客-自我介绍" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
+        <div class="archives">
     
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">我的第一篇博客(自我介绍)</a>
-    </h1>
-  
-
-        
-        <a href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
+    <article class="archive-article archive-type-post">
+  <div class="archive-article-inner">
+    <header class="archive-article-header">
+      	<div class="article-meta">
+	      	<a href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/" class="archive-article-date">
   	<time datetime="2021-03-09T05:58:26.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-03-09</time>
 </a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="我的第一篇博客-其实是自我介绍来的"><a href="#我的第一篇博客-其实是自我介绍来的" class="headerlink" title="我的第一篇博客  其实是自我介绍来的~"></a>我的第一篇博客  其实是自我介绍来的~</h2><h4 id="大家好，欢迎来到我的博客！"><a href="#大家好，欢迎来到我的博客！" class="headerlink" title="大家好，欢迎来到我的博客！"></a>大家好，欢迎来到我的博客！</h4><pre><code>  先自我介绍一下
-    本人现在就读于北京工业大学软件工程系
-                    是一名大一新生
-        称呼嘛。。
-       叫我JOE就好啦~因为这个英文名也一直从小伴随至今
-    
-    从小学起，计算机就一直影响我至今，所以也从很小起就目标很明确
-    不管将来怎么走，肯定是离不开计算机的！（嗯！
-    
-    成长的道路上，当然也缺少不了像各位一样的陪跑者，所以十分感谢各位的光顾~
-    欸。。未来吗
-        说实话现在很难想象自己的未来，考研或者直接工作可能对我来说都是不错的选择。。（废话
-        毕竟可能我还是个小屁孩吧，懂的东西也还只是一些皮毛
-        当然啦~还是可以做做梦的，做梦谁不会呢？
-    考研的话，我可能会偏向于出国~又或者回到自己的家乡台湾继续深造也没准
-    工作的话，BAT,字节跳动美团QAQ都是不知道多少人的梦想吧，至于岗位。。这个。。
-    梦想嘛梦想嘛。。研发人员还是不会去想的，比起那个我还更想去云计算啊，全栈程序员之类的！~
-</code></pre>
-<h4 id="哈哈哈哈-就此打住-做梦总是让人一下子沉浸"><a href="#哈哈哈哈-就此打住-做梦总是让人一下子沉浸" class="headerlink" title="哈哈哈哈   就此打住   做梦总是让人一下子沉浸"></a>哈哈哈哈   就此打住   做梦总是让人一下子沉浸</h4><pre><code>    回到主题
-    创建这篇博客的目的性其实最重要是为了自己，毕竟我觉得
-      博客+GitHub 也算是现在程序员行走的名片了吧
-     当然还是为了能丰富自己的能力，与各位交流
-          互相批评 改正  才能有更大的进步！
-                             wwww~
+        </div>
+    	 
+  
+    <h1 itemprop="name">
+      <a class="archive-article-title" href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">我的第一篇博客(自我介绍)</a>
+    </h1>
+  
 
-        PS:        博客使用Hexo框架搭建  QAQ穷租不起服务器所以就搭建在Git上面了~
-</code></pre>
-<h4 id="同时也用到了大神Yilia的themes-还是很好看的哈哈哈"><a href="#同时也用到了大神Yilia的themes-还是很好看的哈哈哈" class="headerlink" title="同时也用到了大神Yilia的themes~还是很好看的哈哈哈"></a>同时也用到了大神Yilia的themes~还是很好看的哈哈哈</h4>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
+        <div class="article-info info-on-right">
+          
+          
 	<div class="article-category tagcloud">
 		<i class="icon-book icon"></i>
 		<ul class="article-tag-list">
@@ -311,39 +185,17 @@
 	</div>
 
 
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2021/03/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
+        </div>
+        <div class="clearfix"></div>
+    </header>
   </div>
 </article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
   
   
+    </div></section>
+  
+
+    
 
 
           </div>
@@ -365,11 +217,11 @@
     <script>
 	var yiliaConfig = {
 		mathjax: false,
-		isHome: true,
+		isHome: false,
 		isPost: false,
 		isArchive: false,
 		isTag: false,
-		isCategory: false,
+		isCategory: true,
 		open_in_new: false,
 		toc_hide_index: true,
 		root: "/",
