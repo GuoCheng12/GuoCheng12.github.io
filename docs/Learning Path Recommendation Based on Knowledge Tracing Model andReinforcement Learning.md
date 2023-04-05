@@ -1,4 +1,4 @@
-# *Learning Path Recommendation Based on Knowledge Tracing Model andReinforcement Learning*
+# Learning Path Recommendation Based on Knowledge Tracing Model andReinforcement Learning
 
 
 
