@@ -1,0 +1,1162 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../Optimal%20Policies%20with%20Dynamic%20Programming%20Assignment/Assignment2/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+    
+    
+      
+        <title>Assignment 2 - Q-Learning and Expected Sarsa - Wu-GuoCheng's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.85bb2934.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#assignment-2-q-learning-and-expected-sarsa" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wu-GuoCheng&#39;s Docs" class="md-header__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wu-GuoCheng's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Assignment 2 - Q-Learning and Expected Sarsa
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wu-GuoCheng&#39;s Docs" class="md-nav__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Wu-GuoCheng's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to My Blog!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Concept-Aware%20Deep%20Knowledge%20Tracing%20and%20ExerciseRecommendation%20in%20an%20Online%20Learning%20System/" class="md-nav__link">
+        Concept Aware Deep Knowledge Tracing and ExerciseRecommendation in an Online Learning System
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Dynamic%20Programming/" class="md-nav__link">
+        Dynamic Programming
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Learning%20Path%20Recommendation%20Based%20on%20Knowledge%20Tracing%20Model%20andReinforcement%20Learning/" class="md-nav__link">
+        Learning Path Recommendation Based on Knowledge Tracing Model andReinforcement Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Playing%20Atari%20with%20Deep%20Reinforcement%20Learning%28DQN%20key%20paper%29/" class="md-nav__link">
+        Playing Atari with Deep Reinforcement Learning(DQN key paper)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Reward%E7%9A%84%E4%B8%80%E4%BA%9B%E9%80%89%E6%8B%A9%28The%20Reward%20Hypothesis%29/" class="md-nav__link">
+        Reward的一些选择(The Reward Hypothesis)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8A%BD%E8%B1%A1%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        强化学习抽象概念和技术
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+           Bandits and Exploration:Exploitation Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+           Bandits and Exploration:Exploitation Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%20Bandits%20and%20Exploration%3AExploitation%20Assignment/Assignment1/" class="md-nav__link">
+        Assignment 1: Bandits and Exploration/Exploitation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Optimal Policies with Dynamic Programming Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Optimal Policies with Dynamic Programming Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Optimal%20Policies%20with%20Dynamic%20Programming%20Assignment/Assignment2/" class="md-nav__link">
+        Assignment 2: Optimal Policies with Dynamic Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          Q learning and Expected Sarsa Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Q learning and Expected Sarsa Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Assignment 2 - Q-Learning and Expected Sarsa
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Assignment 2 - Q-Learning and Expected Sarsa
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#packages" class="md-nav__link">
+    Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q-learning" class="md-nav__link">
+    Q-Learning
+  </a>
+  
+    <nav class="md-nav" aria-label="Q-Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#packages" class="md-nav__link">
+    Packages
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#q-learning" class="md-nav__link">
+    Q-Learning
+  </a>
+  
+    <nav class="md-nav" aria-label="Q-Learning">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#implementation" class="md-nav__link">
+    Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    Test
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="assignment-2-q-learning-and-expected-sarsa">Assignment 2 - Q-Learning and Expected Sarsa</h1>
+<p>Welcome to Course 2 Programming Assignment 2. In this notebook, you will:</p>
+<ol>
+<li>Implement Q-Learning with $\epsilon$-greedy action selection</li>
+<li>Implement Expected Sarsa with $\epsilon$-greedy action selection</li>
+<li>Investigate how these two algorithms behave on Cliff World (described on page 132 of the textbook)</li>
+</ol>
+<p>We will provide you with the environment and infrastructure to run an experiment (called the experiment program in RL-Glue). This notebook will provide all the code you need to run your experiment and visualise learning performance.</p>
+<p>This assignment will be graded automatically by comparing the behavior of your agent to our implementations of Expected Sarsa and Q-learning. The random seed will be set to avoid different behavior due to randomness. We will highlight the functions you have to use for generating random samples and the number of times these functions should be called. </p>
+<h2 id="packages">Packages</h2>
+<p>You will need the following libraries for this assignment. We are using:
+1. numpy: the fundamental package for scientific computing with Python.
+2. scipy: a Python library for scientific and technical computing.
+3. matplotlib: library for plotting graphs in Python.
+4. RL-Glue: library for reinforcement learning experiments.</p>
+<p>DO NOT IMPORT OTHER LIBRARIES - This will break the autograder.</p>
+<pre><code class="language-python">%matplotlib inline
+import numpy as np
+import matplotlib.pyplot as plt
+from tqdm import tqdm
+from scipy.stats import sem
+
+from rl_glue import RLGlue
+from agent import BaseAgent
+import cliffworld_env
+</code></pre>
+<pre><code class="language-python">plt.rcParams.update({'font.size': 15})
+plt.rcParams.update({'figure.figsize': [10,5]})
+</code></pre>
+<h2 id="q-learning">Q-Learning</h2>
+<p>In this section you will implement and test a Q-Learning agent with $\epsilon$-greedy action selection (Section 6.5 in the textbook). </p>
+<h3 id="implementation">Implementation</h3>
+<p>Your job is to implement the updates in the methods agent_step and agent_end. We provide detailed comments in each method describing what your code should do.</p>
+<pre><code class="language-python"># -----------
+# Graded Cell
+# -----------
+
+class QLearningAgent(BaseAgent):
+    def agent_init(self, agent_init_info):
+        &quot;&quot;&quot;Setup for the agent called when the experiment first starts.
+
+        Args:
+        agent_init_info (dict), the parameters used to initialize the agent. The dictionary contains:
+        {
+            num_states (int): The number of states,
+            num_actions (int): The number of actions,
+            epsilon (float): The epsilon parameter for exploration,
+            step_size (float): The step-size,
+            discount (float): The discount factor,
+        }
+
+        &quot;&quot;&quot;
+        # Store the parameters provided in agent_init_info.
+        self.num_actions = agent_init_info[&quot;num_actions&quot;]
+        self.num_states = agent_init_info[&quot;num_states&quot;]
+        self.epsilon = agent_init_info[&quot;epsilon&quot;]
+        self.step_size = agent_init_info[&quot;step_size&quot;]
+        self.discount = agent_init_info[&quot;discount&quot;]
+        self.rand_generator = np.random.RandomState(agent_info[&quot;seed&quot;])
+
+        # Create an array for action-value estimates and initialize it to zero.
+        self.q = np.zeros((self.num_states, self.num_actions)) # The array of action-value estimates.
+        # the mapping of the states and actions
+
+
+    def agent_start(self, observation):
+        &quot;&quot;&quot;The first method called when the episode starts, called after
+        the environment starts.
+        Args:
+            observation (int): the state observation from the
+                environment's evn_start function.
+        Returns:
+            action (int): the first action the agent takes.
+        &quot;&quot;&quot;
+
+        # Choose action using epsilon greedy.
+        state = observation
+        current_q = self.q[state,:] # state(and mapping four actions)
+        if self.rand_generator.rand() &lt; self.epsilon:
+            action = self.rand_generator.randint(self.num_actions)
+        else:
+            action = self.argmax(current_q)
+        self.prev_state = state
+        self.prev_action = action
+        return action
+
+    def agent_step(self, reward, observation):
+        &quot;&quot;&quot;A step taken by the agent.
+        Args:
+            reward (float): the reward received for taking the last action taken
+            observation (int): the state observation from the
+                environment's step based on where the agent ended up after the
+                last step.w
+        Returns:
+            action (int): the action the agent is taking.
+        &quot;&quot;&quot;
+
+        # Choose action using epsilon greedy.
+        state = observation
+        current_q = self.q[state, :]
+        if self.rand_generator.rand() &lt; self.epsilon:
+            action = self.rand_generator.randint(self.num_actions)
+        else:
+            action = self.argmax(current_q)
+
+        # Perform an update
+        # --------------------------
+        # your code here
+        target = reward + self.discount * np.max(self.q[state, :])
+        self.q[self.prev_state, self.prev_action] = self.q[self.prev_state, self.prev_action] + self.step_size * (target - self.q[self.prev_state, self.prev_action])
+        # --------------------------
+
+        self.prev_state = state
+        self.prev_action = action
+        return action
+
+    def agent_end(self, reward):
+        &quot;&quot;&quot;Run when the agent terminates.
+        Args:
+            reward (float): the reward the agent received for entering the
+                terminal state.
+        &quot;&quot;&quot;
+        # Perform the last update in the episode
+        # --------------------------
+        # your code here
+        target = reward
+        self.q[self.prev_state, self.prev_action] += self.step_size * (target - self.q[self.prev_state, self.prev_action])
+        # --------------------------
+
+    def argmax(self, q_values):
+        &quot;&quot;&quot;argmax with random tie-breaking
+        Args:
+            q_values (Numpy array): the array of action-values
+        Returns:
+            action (int): an action with the highest value
+        &quot;&quot;&quot;
+        top = float(&quot;-inf&quot;)
+        ties = []
+
+        for i in range(len(q_values)):
+            if q_values[i] &gt; top:
+                top = q_values[i]
+                ties = []
+
+            if q_values[i] == top:
+                ties.append(i)
+
+        return self.rand_generator.choice(ties)
+</code></pre>
+<h3 id="test">Test</h3>
+<p>Run the cells below to test the implemented methods. The output of each cell should match the expected output.</p>
+<p>Note that passing this test does not guarantee correct behavior on the Cliff World.</p>
+<pre><code class="language-python"># -----------
+# Tested Cell
+# -----------
+# The contents of the cell will be tested by the autograder.
+# If they do not pass here, they will not pass there.
+
+np.random.seed(0)
+
+agent_info = {&quot;num_actions&quot;: 4, &quot;num_states&quot;: 3, &quot;epsilon&quot;: 0.1, &quot;step_size&quot;: 0.1, &quot;discount&quot;: 1.0, &quot;seed&quot;: 0}
+agent = QLearningAgent()
+agent.agent_init(agent_info)
+action = agent.agent_start(0)
+expected_values = np.array([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+])
+
+assert np.all(agent.q == expected_values)
+assert action == 1
+
+# reset the agent
+agent.agent_init(agent_info)
+
+action = agent.agent_start(0)
+
+assert action == 1
+
+action = agent.agent_step(2, 1)
+assert action == 3
+
+action = agent.agent_step(0, 0)
+assert action == 1
+
+expected_values = np.array([
+    [0.,  0.2,  0.,  0.  ],
+    [0.,  0.,   0.,  0.02],
+    [0.,  0.,   0.,  0.  ],
+])
+assert np.all(np.isclose(agent.q, expected_values))
+
+# reset the agent
+agent.agent_init(agent_info)
+
+action = agent.agent_start(0)
+assert action == 1
+
+action = agent.agent_step(2, 1)
+assert action == 3
+
+agent.agent_end(1)
+
+expected_values = np.array([
+    [0.,  0.2, 0.,  0. ],
+    [0.,  0.,  0.,  0.1],
+    [0.,  0.,  0.,  0. ],
+])
+assert np.all(np.isclose(agent.q, expected_values))
+
+# Run a few more tests to ensure the epsilon-random action is not picked in the update
+expected_values = np.array([
+    [0.,         0.2,        0.,         0.        ],
+    [5.97824336, 5.75000715, 5.79372928, 6.69483878],
+    [0.,         0.,         0.,         0.        ],
+])
+agent.epsilon = 1.0  # Set epsilon high so that there is a larger chance to catch the errors
+for _ in range(100):
+    agent.agent_step(2, 1)
+assert np.all(np.isclose(agent.q, expected_values))
+</code></pre>
+<h1 id="expected-sarsa">Expected Sarsa</h1>
+<p>In this section you will implement an Expected Sarsa agent with $\epsilon$-greedy action selection (Section 6.6 in the textbook). </p>
+<h3 id="implementation_1">Implementation</h3>
+<p>Your job is to implement the updates in the methods agent_step and agent_end. We provide detailed comments in each method describing what your code should do.</p>
+<pre><code class="language-python"># -----------
+# Graded Cell
+# -----------
+
+class ExpectedSarsaAgent(BaseAgent):
+    def agent_init(self, agent_init_info):
+        &quot;&quot;&quot;Setup for the agent called when the experiment first starts.
+
+        Args:
+        agent_init_info (dict), the parameters used to initialize the agent. The dictionary contains:
+        {
+            num_states (int): The number of states,
+            num_actions (int): The number of actions,
+            epsilon (float): The epsilon parameter for exploration,
+            step_size (float): The step-size,
+            discount (float): The discount factor,
+        }
+
+        &quot;&quot;&quot;
+        # Store the parameters provided in agent_init_info.
+        self.num_actions = agent_init_info[&quot;num_actions&quot;]
+        self.num_states = agent_init_info[&quot;num_states&quot;]
+        self.epsilon = agent_init_info[&quot;epsilon&quot;]
+        self.step_size = agent_init_info[&quot;step_size&quot;]
+        self.discount = agent_init_info[&quot;discount&quot;]
+        self.rand_generator = np.random.RandomState(agent_info[&quot;seed&quot;])
+
+        # Create an array for action-value estimates and initialize it to zero.
+        self.q = np.zeros((self.num_states, self.num_actions)) # The array of action-value estimates.
+
+
+    def agent_start(self, observation):
+        &quot;&quot;&quot;The first method called when the episode starts, called after
+        the environment starts.
+        Args:
+            observation (int): the state observation from the
+                environment's evn_start function.
+        Returns:
+            action (int): the first action the agent takes.
+        &quot;&quot;&quot;
+
+        # Choose action using epsilon greedy.
+        state = observation
+        current_q = self.q[state, :]
+        # epsilon-greedy algorithm
+        if self.rand_generator.rand() &lt; self.epsilon:
+            action = self.rand_generator.randint(self.num_actions)
+        else:
+            action = self.argmax(current_q)
+        self.prev_state = state
+        self.prev_action = action
+        return action
+
+    def agent_step(self, reward, observation):
+        &quot;&quot;&quot;A step taken by the agent.
+        Args:
+            reward (float): the reward received for taking the last action taken
+            observation (int): the state observation from the
+                environment's step based on where the agent ended up after the
+                last step.
+        Returns:
+            action (int): the action the agent is taking.
+        &quot;&quot;&quot;
+
+        # Choose action using epsilon greedy.
+        state = observation
+        current_q = self.q[state,:]
+        if self.rand_generator.rand() &lt; self.epsilon:
+            action = self.rand_generator.randint(self.num_actions)
+        else:
+            action = self.argmax(current_q)
+
+        # Perform an update
+        # --------------------------
+        # your code here
+        next_q = self.q[state, :]
+        expected_value = np.sum(next_q * self.epsilon / self.num_actions) + np.sum(next_q * (1 - self.epsilon) * np.identity(self.num_actions)[np.argmax(next_q), :])
+        target = reward + self.discount*expected_value
+
+        self.q[self.prev_state, self.prev_action] += self.step_size * (target - self.q[self.prev_state, self.prev_action])
+        # --------------------------
+
+        self.prev_state = state
+        self.prev_action = action
+        return action
+
+    def agent_end(self, reward):
+        &quot;&quot;&quot;Run when the agent terminates.
+        Args:
+            reward (float): the reward the agent received for entering the
+                terminal state.
+        &quot;&quot;&quot;
+        # Perform the last update in the episode
+        # --------------------------
+        # your code here
+        target = reward
+        self.q[self.prev_state, self.prev_action] += self.step_size * (target - self.q[self.prev_state, self.prev_action])
+        # --------------------------
+
+    def argmax(self, q_values):
+        &quot;&quot;&quot;argmax with random tie-breaking
+        Args:
+            q_values (Numpy array): the array of action-values
+        Returns:
+            action (int): an action with the highest value
+        &quot;&quot;&quot;
+        top = float(&quot;-inf&quot;)
+        ties = []
+
+        for i in range(len(q_values)):
+            if q_values[i] &gt; top:
+                top = q_values[i]
+                ties = []
+
+            if q_values[i] == top:
+                ties.append(i)
+
+        return self.rand_generator.choice(ties)
+</code></pre>
+<h3 id="test_1">Test</h3>
+<p>Run the cells below to test the implemented methods. The output of each cell should match the expected output.</p>
+<p>Note that passing this test does not guarantee correct behavior on the Cliff World.</p>
+<pre><code class="language-python"># -----------
+# Tested Cell
+# -----------
+# The contents of the cell will be tested by the autograder.
+# If they do not pass here, they will not pass there.
+
+agent_info = {&quot;num_actions&quot;: 4, &quot;num_states&quot;: 3, &quot;epsilon&quot;: 0.1, &quot;step_size&quot;: 0.1, &quot;discount&quot;: 1.0, &quot;seed&quot;: 0}
+agent = ExpectedSarsaAgent()
+agent.agent_init(agent_info)
+
+action = agent.agent_start(0)
+assert action == 1
+
+expected_values = np.array([
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+])
+assert np.all(agent.q == expected_values)
+
+# ---------------
+# test agent step
+# ---------------
+
+action = agent.agent_step(2, 1)
+assert action == 3
+
+action = agent.agent_step(0, 0)
+assert action == 1
+
+expected_values = np.array([
+    [0, 0.2, 0, 0],
+    [0, 0, 0, 0.0185],
+    [0, 0, 0, 0],
+])
+assert np.all(np.isclose(agent.q, expected_values))
+
+# --------------
+# test agent end
+# --------------
+
+agent.agent_end(1)
+
+expected_values = np.array([
+    [0, 0.28, 0, 0],
+    [0, 0, 0, 0.0185],
+    [0, 0, 0, 0],
+])
+assert np.all(np.isclose(agent.q, expected_values))
+</code></pre>
+<h1 id="solving-the-cliff-world">Solving the Cliff World</h1>
+<p>We described the Cliff World environment in the video "Expected Sarsa in the Cliff World" in Lesson 3. This is an undiscounted episodic task and thus we set $\gamma$=1. The agent starts in the bottom left corner of the gridworld below and takes actions that move it in the four directions. Actions that would move the agent off of the cliff incur a reward of -100 and send the agent back to the start state. The reward for all other transitions is -1. An episode terminates when the agent reaches the bottom right corner. </p>
+<p><img src="cliffworld.png" alt="Drawing" style="width: 600px;"/></p>
+<p>Using the experiment program in the cell below we now compare the agents on the Cliff World environment and plot the sum of rewards during each episode for the two agents.</p>
+<p>The result of this cell will be graded. If you make any changes to your algorithms, you have to run this cell again before submitting the assignment.</p>
+<pre><code class="language-python"># ---------------
+# Discussion Cell
+# ---------------
+np.random.seed(0)
+
+agents = {
+    &quot;Q-learning&quot;: QLearningAgent,
+    &quot;Expected Sarsa&quot;: ExpectedSarsaAgent
+}
+env = cliffworld_env.Environment
+all_reward_sums = {} # Contains sum of rewards during episode
+all_state_visits = {} # Contains state visit counts during the last 10 episodes
+agent_info = {&quot;num_actions&quot;: 4, &quot;num_states&quot;: 48, &quot;epsilon&quot;: 0.1, &quot;step_size&quot;: 0.5, &quot;discount&quot;: 1.0}
+env_info = {}
+num_runs = 100 # The number of runs
+num_episodes = 200 # The number of episodes in each run
+
+for algorithm in [&quot;Q-learning&quot;, &quot;Expected Sarsa&quot;]:
+    all_reward_sums[algorithm] = []
+    all_state_visits[algorithm] = []
+    for run in tqdm(range(num_runs)):
+        agent_info[&quot;seed&quot;] = run
+        rl_glue = RLGlue(env, agents[algorithm])
+        rl_glue.rl_init(agent_info, env_info)
+
+        reward_sums = []
+        state_visits = np.zeros(48)
+        for episode in range(num_episodes):
+            if episode &lt; num_episodes - 10:
+                # Runs an episode
+                rl_glue.rl_episode(10000) 
+            else: 
+                # Runs an episode while keeping track of visited states
+                state, action = rl_glue.rl_start()
+                state_visits[state] += 1
+                is_terminal = False
+                while not is_terminal:
+                    reward, state, action, is_terminal = rl_glue.rl_step()
+                    state_visits[state] += 1
+
+            reward_sums.append(rl_glue.rl_return())
+
+        all_reward_sums[algorithm].append(reward_sums)
+        all_state_visits[algorithm].append(state_visits)
+
+# plot results
+for algorithm in [&quot;Q-learning&quot;, &quot;Expected Sarsa&quot;]:
+    plt.plot(np.mean(all_reward_sums[algorithm], axis=0), label=algorithm)
+plt.xlabel(&quot;Episodes&quot;)
+plt.ylabel(&quot;Sum of\n rewards\n during\n episode&quot;,rotation=0, labelpad=40)
+plt.ylim(-100,0)
+plt.legend()
+plt.show()
+</code></pre>
+<pre><code>100%|██████████| 100/100 [00:19&lt;00:00,  5.26it/s]
+100%|██████████| 100/100 [00:31&lt;00:00,  3.22it/s]
+</code></pre>
+<p><img alt="png" src="../output_26_1.png" /></p>
+<p>To see why these two agents behave differently, let's inspect the states they visit most. Run the cell below to generate plots showing the number of timesteps that the agents spent in each state over the last 10 episodes.</p>
+<pre><code class="language-python"># ---------------
+# Discussion Cell
+# ---------------
+
+for algorithm, position in [(&quot;Q-learning&quot;, 211), (&quot;Expected Sarsa&quot;, 212)]:
+    plt.subplot(position)
+    average_state_visits = np.array(all_state_visits[algorithm]).mean(axis=0)
+    grid_state_visits = average_state_visits.reshape((4,12))
+    grid_state_visits[0,1:-1] = np.nan
+    plt.pcolormesh(grid_state_visits, edgecolors='gray', linewidth=2)
+    plt.title(algorithm)
+    plt.axis('off')
+    cm = plt.get_cmap()
+    cm.set_bad('gray')
+
+    plt.subplots_adjust(bottom=0.0, right=0.7, top=1.0)
+    cax = plt.axes([0.85, 0.0, 0.075, 1.])
+
+cbar = plt.colorbar(cax=cax)
+cbar.ax.set_ylabel(&quot;Visits during\n the last 10\n episodes&quot;, rotation=0, labelpad=70)
+plt.show()
+</code></pre>
+<p><img alt="png" src="../output_28_0.png" /></p>
+<p>The Q-learning agent learns the optimal policy, one that moves along the cliff and reaches the goal in as few steps as possible. However, since the agent does not follow the optimal policy and uses $\epsilon$-greedy exploration, it occasionally falls off the cliff. The Expected Sarsa agent takes exploration into account and follows a safer path.</p>
+<p>Previously we used a fixed step-size of 0.5 for the agents. What happens with other step-sizes? Does this difference in performance persist?</p>
+<p>In the next experiment we will try 10 different step-sizes from 0.1 to 1.0 and compare the sum of rewards per episode averaged over the first 100 episodes (similar to the interim performance curves in Figure 6.3 of the textbook). Shaded regions show standard errors.</p>
+<p>This cell takes around 10 minutes to run. The result of this cell will be graded. If you make any changes to your algorithms, you have to run this cell again before submitting the assignment.</p>
+<pre><code class="language-python"># ---------------
+# Discussion Cell
+# ---------------
+from itertools import product
+
+agents = {
+    &quot;Q-learning&quot;: QLearningAgent,
+    &quot;Expected Sarsa&quot;: ExpectedSarsaAgent
+}
+env = cliffworld_env.Environment
+all_reward_sums = {}
+step_sizes = np.linspace(0.1,1.0,10)
+agent_info = {&quot;num_actions&quot;: 4, &quot;num_states&quot;: 48, &quot;epsilon&quot;: 0.1, &quot;discount&quot;: 1.0}
+env_info = {}
+num_runs = 30
+num_episodes = 100
+all_reward_sums = {}
+
+algorithms = [&quot;Q-learning&quot;, &quot;Expected Sarsa&quot;]
+cross_product = list(product(algorithms, step_sizes, range(num_runs)))
+for algorithm, step_size, run in tqdm(cross_product):
+    if (algorithm, step_size) not in all_reward_sums:
+        all_reward_sums[(algorithm, step_size)] = []
+
+    agent_info[&quot;step_size&quot;] = step_size
+    agent_info[&quot;seed&quot;] = run
+    rl_glue = RLGlue(env, agents[algorithm])
+    rl_glue.rl_init(agent_info, env_info)
+
+    last_episode_total_reward = 0
+    for episode in range(num_episodes):
+        rl_glue.rl_episode(0)
+    all_reward_sums[(algorithm, step_size)].append(rl_glue.rl_return()/num_episodes)
+
+
+for algorithm in [&quot;Q-learning&quot;, &quot;Expected Sarsa&quot;]:
+    algorithm_means = np.array([np.mean(all_reward_sums[(algorithm, step_size)]) for step_size in step_sizes])
+    algorithm_stds = np.array([sem(all_reward_sums[(algorithm, step_size)]) for step_size in step_sizes])
+    plt.plot(step_sizes, algorithm_means, marker='o', linestyle='solid', label=algorithm)
+    plt.fill_between(step_sizes, algorithm_means + algorithm_stds, algorithm_means - algorithm_stds, alpha=0.2)
+
+plt.legend()
+plt.xlabel(&quot;Step-size&quot;)
+plt.ylabel(&quot;Sum of\n rewards\n per episode&quot;,rotation=0, labelpad=50)
+plt.xticks(step_sizes)
+plt.show()
+</code></pre>
+<pre><code>100%|██████████| 600/600 [02:01&lt;00:00,  4.94it/s]
+</code></pre>
+<p><img alt="png" src="../output_30_1.png" /></p>
+<p>Expected Sarsa shows an advantage over Q-learning in this problem across a wide range of step-sizes.</p>
+<p>Congratulations! Now you have:</p>
+<ul>
+<li>implemented Q-Learning with $\epsilon$-greedy action selection</li>
+<li>implemented Expected Sarsa with $\epsilon$-greedy action selection</li>
+<li>investigated the behavior of these two algorithms on Cliff World</li>
+</ul>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      
+    
+  </body>
+</html>

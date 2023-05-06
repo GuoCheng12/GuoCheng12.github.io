@@ -1,0 +1,757 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../Concept-Aware%20Deep%20Knowledge%20Tracing%20and%20ExerciseRecommendation%20in%20an%20Online%20Learning%20System/">
+      
+      
+        <link rel="next" href="../Learning%20Path%20Recommendation%20Based%20on%20Knowledge%20Tracing%20Model%20andReinforcement%20Learning/">
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+    
+    
+      
+        <title>Dynamic Programming - Wu-GuoCheng's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#dynamic-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Wu-GuoCheng&#39;s Docs" class="md-header__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wu-GuoCheng's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Dynamic Programming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Wu-GuoCheng&#39;s Docs" class="md-nav__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Wu-GuoCheng's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        Welcome to My Blog!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Concept-Aware%20Deep%20Knowledge%20Tracing%20and%20ExerciseRecommendation%20in%20an%20Online%20Learning%20System/" class="md-nav__link">
+        Concept Aware Deep Knowledge Tracing and ExerciseRecommendation in an Online Learning System
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Dynamic Programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Dynamic Programming
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-control" class="md-nav__link">
+    Feedback Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-concept" class="md-nav__link">
+    Policy Concept
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    Application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multistage-decision-making" class="md-nav__link">
+    Multistage Decision Making
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adaptive-control" class="md-nav__link">
+    Adaptive Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hierarchy-of-decision-making" class="md-nav__link">
+    Hierarchy of Decision Making
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Learning%20Path%20Recommendation%20Based%20on%20Knowledge%20Tracing%20Model%20andReinforcement%20Learning/" class="md-nav__link">
+        Learning Path Recommendation Based on Knowledge Tracing Model andReinforcement Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Playing%20Atari%20with%20Deep%20Reinforcement%20Learning%28DQN%20key%20paper%29/" class="md-nav__link">
+        Playing Atari with Deep Reinforcement Learning(DQN key paper)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Reward%E7%9A%84%E4%B8%80%E4%BA%9B%E9%80%89%E6%8B%A9%28The%20Reward%20Hypothesis%29/" class="md-nav__link">
+        Reward的一些选择(The Reward Hypothesis)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8A%BD%E8%B1%A1%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        强化学习抽象概念和技术
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+           Bandits and Exploration:Exploitation Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+           Bandits and Exploration:Exploitation Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../%20Bandits%20and%20Exploration%3AExploitation%20Assignment/Assignment1/" class="md-nav__link">
+        Assignment 1: Bandits and Exploration/Exploitation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Optimal Policies with Dynamic Programming Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Optimal Policies with Dynamic Programming Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Optimal%20Policies%20with%20Dynamic%20Programming%20Assignment/Assignment2/" class="md-nav__link">
+        Assignment 2: Optimal Policies with Dynamic Programming
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          Q learning and Expected Sarsa Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Q learning and Expected Sarsa Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Q-learning%20and%20Expected%20Sarsa%20Assignment/assignment/" class="md-nav__link">
+        Assignment 2 - Q-Learning and Expected Sarsa
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#background" class="md-nav__link">
+    Background
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#feedback-control" class="md-nav__link">
+    Feedback Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#policy-concept" class="md-nav__link">
+    Policy Concept
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#application" class="md-nav__link">
+    Application
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#multistage-decision-making" class="md-nav__link">
+    Multistage Decision Making
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#adaptive-control" class="md-nav__link">
+    Adaptive Control
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hierarchy-of-decision-making" class="md-nav__link">
+    Hierarchy of Decision Making
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conclusion" class="md-nav__link">
+    Conclusion
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="dynamic-programming">Dynamic Programming</h1>
+<p><strong>Richard Bellman</strong></p>
+<p><u>2023/2/27 注释</u></p>
+<h2 id="background">Background</h2>
+<ul>
+<li>人类在发展过程中，不断提高自己思考问题，解决问题的能力。</li>
+</ul>
+<blockquote>
+<p>Man is a decision-making animal and, above all, conscious of this fact. This self-scrutiny has led to continuing efforts to find efficient ways of behaving in the face of complexity and uncertainty.</p>
+</blockquote>
+<h2 id="feedback-control">Feedback Control</h2>
+<p>作者让我们考虑这样一个情况：飞船降落月球的场景</p>
+<p><img src="https://pic.imgdb.cn/item/64344bb00d2dde577785381f.jpg" style="zoom:50%;" /></p>
+<p>目标就是最短时间最少功耗...到达目的地</p>
+<p>那么这个问题有时候很容易被我们理想化了，对此我们不得不随时对这样的trajectory进行监控，由于各种不确定性因素的影响，有时候我们的路径可能变成这样：</p>
+<p><img src="/Users/wuguocheng/Library/Application Support/typora-user-images/image-20230411015156508.png" alt="image-20230411015156508" style="zoom:50%;" /></p>
+<p>愚蠢的办法就是将这个路径不停的根据“刚刚制定的路径”不断的修改方案，使得我们的路径回归到原始状态。但是这个显然太愚蠢了。动态规划，最base的地方就是千万不能忘记最主要的目的。</p>
+<p><img src="https://pic.imgdb.cn/item/643454360d2dde57778be3b5.jpg" style="zoom:50%;" /></p>
+<h2 id="policy-concept">Policy Concept</h2>
+<p><strong>多阶段决策被视为政策的重复应用。在最小化时间、燃料、成本或最大化利润的意义上最有效的策略称为最优策略。</strong></p>
+<p>基于刚刚的问题，我们应该想到的是这样的策略：</p>
+<p><img src="https://pic.imgdb.cn/item/643454210d2dde57778bd742.jpg" style="zoom:50%;" /></p>
+<p>这是DP中最核心的一点。</p>
+<p>思考并使用DP解决问题的本质就是要时刻关注当前状态，无论之前有多少束缚，我们在此刻都是要最优化现处的策略。</p>
+<p>动态规划是一种数学技术，用于复杂系统中的决策制定，其应用于预测和控制问题</p>
+<h2 id="application">Application</h2>
+<p>这里作者主要想讲述当时年代（此论文写于1966年），迫于计算机的内存和计算能力有限，动态规划问题一直都不太能够实现大部分的Application，但随着技术进步，动态规划变得更加广泛适用。</p>
+<h2 id="multistage-decision-making">Multistage Decision Making</h2>
+<blockquote>
+<p>这段话很震撼</p>
+</blockquote>
+<p>作者在这段想表示，当我们如果面临的问题是一个<strong>复杂决策中涉及不确定性时</strong>的问题，我们应该也继续想到<strong>DP</strong>给我们带来的算法好处。首先，对于这样的问题，我们可以<strong>简化假设</strong>，例如：我们可以准确确定系统在任何时候的状态，并且知道何时施加控制以及其效果。然而，这些假设都是理想化的，当它们在科学上限制了我们理解和预测的能力时，我们应该准备修改它们。</p>
+<p>在这里，作者仅考虑了因果预测需要修改的情况。如果我们无法准确预测决策的效果，那么有效决策的问题就变得更加困难。此时，“有效”或“最优”的定义也变得模糊。概率理论是一种研究不可预测效果的数学理论，但这个理论并不能涵盖所有类型的随机事件，只能处理特定类型的不确定性。</p>
+<blockquote>
+<p>在这里，"有效"（effective）和"最优"（optimal）是指在面对不确定性的情况下，能够帮助我们实现目标的决策策略。这些策略需要考虑到可能的随机事件，以便在多个阶段的决策过程中使我们尽可能接近目标。有效和最优策略可以最大化收益、最小化损失或实现其他特定的目标。</p>
+<p>在前面的掷硬币赌博游戏示例中，"有效"和"最优"策略是指在每次抛硬币时，指导你下注金额的规则，使你能够在10轮游戏中实现将100元增加到200元的目标。这个策略需要在每轮游戏中都能给出最佳的下注建议，以便在整个过程中使你的收益最大化。</p>
+<p>值得注意的是，在面对不确定性时，"有效"和"最优"并不意味着我们可以完全预测决策的结果，而是我们在可用信息和当前情况下，采取了最合适的行动。这些策略旨在使我们在整个决策过程中尽可能地实现目标，而不是仅仅关注单个阶段的结果。</p>
+</blockquote>
+<p>作者提到，在不确定条件下研究决策过程，可以将问题领域转向赌博系统。赌博系统涉及的数学原理与保险公司的精算、华尔街的投资计划以及可靠性理论、库存理论等方面具有相同的抽象性质。</p>
+<p>赌博系统需要一种政策，这个政策告诉赌徒在每种可能的情况下应该做出什么决策。动态规划已经在21点等赌博游戏中取得了成功。在涉及随机事件的多阶段决策过程中，灵活的策略非常适用。最优性原理为处理确定性和概率决策过程提供了统一的数学工具。随机这个术语经常用来描述涉及随机事件的过程，因为它没有日常生活的含义。</p>
+<p><u>举个例子:</u></p>
+<p>假设你在一场掷硬币游戏中，每次抛硬币，正面朝上你赢，反面朝上你输。你开始时有100元，你的目标是通过合理的下注策略，在10轮游戏中赢得200元。在这个场景中，你面临的问题就是如何在每次抛硬币时决定下注多少钱，以实现你的目标。</p>
+<p>在这个游戏中，有许多不确定因素，比如每次抛硬币的结果是随机的。由于这个不确定性，我们无法确切地预测每次决策的结果。因此，我们需要运用概率理论来帮助我们进行决策。</p>
+<p>为了解决这个问题，你可以制定一个策略，根据你当前拥有的金额以及你的目标，告诉你每次应该下注多少。这个策略需要在每轮游戏中都能指导你做出决策，同时考虑到游戏的随机性。动态规划方法可以帮助你找到这样一个策略，因为它可以在每个阶段都优化你的决策，使你在整个过程中达到最优结果。</p>
+<p>总之，这段文字主要讨论了在面对不确定性时如何进行复杂决策。通过运用概率理论和动态规划，我们可以在随机事件中找到一种有效的策略来指导我们的决策。</p>
+<blockquote>
+<p>恍然大悟，动态规划解决MDP的影子</p>
+</blockquote>
+<h2 id="adaptive-control">Adaptive Control</h2>
+<p>传统的决策过程我们是在已知情况下做出假设：</p>
+<p><img src="https://pic.imgdb.cn/item/6434ceba0d2dde5777f9577b.jpg" style="zoom:50%;" /></p>
+<p>但是作者提出，在很多重要工作中（实际上在所有决策的场景中），我们需要在不完全了解底层系统的基本工作原理的情况下做决策。</p>
+<p>这个时候就提出一种新的概念——<strong>“Adaptive Control”</strong>自适应控制</p>
+<p>自适应控制是一种<strong>基于经验修改最优策略</strong>的方法。在这种方法中，我们从对最优策略的某些预设概念开始，然后根据经验系统地修改这些策略。自适应控制与心理学家所说的<strong>适应</strong>有密切联系。</p>
+<p>举个例子：</p>
+<blockquote>
+<p>在无人驾驶汽车的开发过程中，我们无法提前知道所有可能遇到的道路、交通和天气条件。同时，无人驾驶汽车需要在不断变化的环境中做出实时决策。因此，我们需要设计一个能够根据实时数据调整其行为的自适应控制系统。</p>
+<p>在这个例子中，自适应控制系统首先基于预先设定的一组规则（例如遵守交通法规、保持安全距离等），在实际驾驶过程中，系统会收集到各种数据，如其他车辆的位置、速度，道路状况等。基于这些信息，系统会不断调整自己的行为，以适应当前的环境。</p>
+<p>例如，当无人驾驶汽车遇到拥堵时，自适应控制系统可能会根据实时交通数据寻找最佳路线。如果遇到突如其来的恶劣天气，系统可能会降低车速以保证行驶安全。在所有这些情况下，系统都在不断地学习并根据实时数据调整自己的行为。</p>
+<p>这个过程与心理学中的适应概念相似。无人驾驶汽车需要在不断变化的环境中通过实时学习和调整，以确保其决策始终能够满足安全、有效和舒适等目标。</p>
+</blockquote>
+<h2 id="hierarchy-of-decision-making">Hierarchy of Decision Making</h2>
+<p>作者在这里讨论到了“machine can learning” ？</p>
+<p>关于机器能否思考这一问题引发了很多争议，作者在这个问题所理解的意义取决于我们如何定义“机器”、“思考”以及“能”。在这里，“机器”是指现有的商用数字计算机。而为了定义“思考”，我们将其与决策制定联系起来，将思考过程的不同层次与决策过程的不同层次等同起来。根据这种定义，我们可以探讨我们是否能编写一个在指定时间内执行特定决策过程的计算机程序。“能”具有不同的含义，取决于我们允许的时间是2分钟、2小时还是2年，或者仅要求时间是有限的，尽管不可预测。</p>
+<p>目前，计算机可以被编程来玩国际象棋或跳棋，但它还不能从<strong>经验中学习</strong>成为国际象棋大师。如果能实现这种能力，将是自适应过程理论的重大突破。</p>
+<p>按照这种思路，可以将决策过程分为不同层次。第一层是上文提到的确定性或随机类型的过程。第二层涉及了解系统结构的过程。在每个阶段都需要一个局部策略来做决策，而全局策略则根据经验修改局部策略。这就是关于决策的决策。选择全局策略是关于关于决策的决策的决策。我们可以继续按照这种方式进行。</p>
+<blockquote>
+<p>首先，在第一层，我们考虑确定性或随机类型的过程。这些过程通常涉及基于已知信息做出决策。例如，在给定的环境下找到最佳路径。</p>
+<p>接下来，在第二层，我们考虑关于系统结构的学习过程。在这一层，我们需要在每个阶段使用局部策略（基于当前状态和信息做出决策），并根据经验修改这些局部策略。这可以称为关于决策的决策，因为我们在考虑如何在不断变化的情况下调整决策方法。这一层的关键是从<strong>经验中学习</strong>以改进决策方法。</p>
+<p>(关于什么是系统结构的学习过程，简单来说就是我们试图了解和学习潜在的系统规律，os:说白了就是MDP中的env提供的observation或者reward给我们带来的信息。</p>
+<p>系统结构的学习过程是指在决策过程中，我们试图了解和学习潜在的系统规律、关系和模式。这些规律和模式有助于我们更好地理解系统的行为，从而在将来做出更明智的决策。简而言之，学习系统结构意味着我们试图揭示系统的内在逻辑，以便在决策过程中加以利用。</p>
+<p>例如，假设你正在管理一个复杂的供应链系统，你需要决定如何优化库存水平以满足客户需求。在这个过程中，你可能会发现系统中的某些规律，例如某些产品的需求周期性波动、供应商的交货时间可靠性等。通过学习这些规律，你可以更好地预测未来的需求变化，并相应地调整库存水平以提高整体效率。</p>
+<p>系统结构的学习过程通常涉及从经验和数据中提取信息，以便调整和优化决策策略。这可能包括观察系统的行为、分析历史数据、进行试验等。随着时间的推移，通过这些学习过程，我们可以不断更新和改进我们的决策方法，以更好地适应系统的变化。在这个过程中，局部策略（基于当前状态和信息做出的决策）可以根据所学到的系统结构进行调整和优化。)</p>
+<p>再往上，选择全局策略（调整局部策略的方法）可以被认为是关于关于决策的决策的决策。这意味着我们不仅在调整具体决策，还在调整如何调整决策方法本身。这个层次更加复杂，因为它涉及到对整个决策过程的优化和调整。</p>
+<p>总的来说，这个层次结构强调了决策过程在不同层次上的复杂性。在每个层次上，我们需要考虑不同的问题和策略，以便更好地处理各种情况。这种分层方法有助于我们更好地理解决策过程的不同方面，并有可能开发出更加智能和自适应的决策系统。</p>
+</blockquote>
+<p>无论我们采用哪种方式引入<strong>层次结构</strong>，都会遇到一定的问题。例如，在特定的决策过程中如何确定其层次？</p>
+<blockquote>
+<ol>
+<li>在引入层次结构时，我们需要确保每个层次都具有明确的目标和职责。这将有助于确保在整个决策过程中，各个层次之间的沟通和协作得以顺利进行。</li>
+<li>在设计这些层次时，我们应该考虑在不同层次之间分享信息和知识的方法。有效的信息共享可以提高决策过程的整体效率，并有助于避免重复努力和资源浪费。</li>
+<li>在实际应用中，我们可能需要根据特定问题和环境调整层次结构。在某些情况下，可能需要增加更多层次以处理更复杂的问题，而在其他情况下，可能需要减少层次以简化过程。</li>
+<li>虽然层次结构可以帮助我们更好地理解和解决复杂问题，但它也可能带来一定程度的管理挑战。例如，可能需要更多的协调和沟通来确保各个层次之间的顺利合作。因此，在引入层次结构时，我们需要权衡其优缺点。</li>
+<li>在整个决策过程中，我们需要不断地评估和改进层次结构。这可能包括定期审查各个层次的表现，以及根据需要调整职责和目标。通过这种持续改进的方法，我们可以确保层次结构始终保持适应性，并能够有效地应对新的挑战和变化。</li>
+</ol>
+</blockquote>
+<h2 id="conclusion">Conclusion</h2>
+<blockquote>
+<p>作者这段话引发的思考在如今也是一个具有挑战的问题</p>
+</blockquote>
+<p>这段话提到了人类对大脑过程（包括心理学和生理学方面）的研究兴趣在很大程度上受到了数字计算机的推动。尽管目前尚无完整的理论来解释这些引人入胜的问题，但数字计算机的出现促使人们对大脑过程产生了浓厚兴趣。</p>
+<p>作者指出，在处理人类个体和社会时，我们可以在<strong>不完美</strong>的情况下应对，如非理性、不合逻辑、不一致和不完整的行为。然而，在操作计算机时，我们必须满足详细的指令和绝对精确性的严格要求。如果我们理解了人类在面对复杂性、不确定性和非理性时做出有效决策的能力，那么我们可以比现在更有效地利用计算机。</p>
+<blockquote>
+<p>神经网络？可解释性？</p>
+</blockquote>
+<p>正是对这一事实的认识激发了神经生理学领域研究的繁荣。越来越多地研究大脑的信息处理方面，我们变得越来越困惑和惊叹。在充分理解和重现这些过程之前，我们还有很长的路要走。</p>
+<p>总之，数学家在许多新兴领域面临着数以千计的严峻挑战、难题和困惑，尽管他们可能永远无法解决其中的一些问题，但他们永远不会感到无聊。对数学家来说，这已经足够了。</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.fac441b0.min.js"></script>
+      
+    
+  </body>
+</html>

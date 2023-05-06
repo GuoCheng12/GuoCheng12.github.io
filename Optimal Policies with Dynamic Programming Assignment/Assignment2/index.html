@@ -1,0 +1,1065 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../%20Bandits%20and%20Exploration%3AExploitation%20Assignment/Assignment1/">
+      
+      
+        <link rel="next" href="../../Q-learning%20and%20Expected%20Sarsa%20Assignment/assignment/">
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.9">
+    
+    
+      
+        <title>Assignment 2: Optimal Policies with Dynamic Programming - Wu-GuoCheng's Docs</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.85bb2934.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#assignment-2-optimal-policies-with-dynamic-programming" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Wu-GuoCheng&#39;s Docs" class="md-header__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Wu-GuoCheng's Docs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Assignment 2: Optimal Policies with Dynamic Programming
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Wu-GuoCheng&#39;s Docs" class="md-nav__button md-logo" aria-label="Wu-GuoCheng's Docs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Wu-GuoCheng's Docs
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        Welcome to My Blog!
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Concept-Aware%20Deep%20Knowledge%20Tracing%20and%20ExerciseRecommendation%20in%20an%20Online%20Learning%20System/" class="md-nav__link">
+        Concept Aware Deep Knowledge Tracing and ExerciseRecommendation in an Online Learning System
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Dynamic%20Programming/" class="md-nav__link">
+        Dynamic Programming
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Learning%20Path%20Recommendation%20Based%20on%20Knowledge%20Tracing%20Model%20andReinforcement%20Learning/" class="md-nav__link">
+        Learning Path Recommendation Based on Knowledge Tracing Model andReinforcement Learning
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Playing%20Atari%20with%20Deep%20Reinforcement%20Learning%28DQN%20key%20paper%29/" class="md-nav__link">
+        Playing Atari with Deep Reinforcement Learning(DQN key paper)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Reward%E7%9A%84%E4%B8%80%E4%BA%9B%E9%80%89%E6%8B%A9%28The%20Reward%20Hypothesis%29/" class="md-nav__link">
+        Reward的一些选择(The Reward Hypothesis)
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0%E6%8A%BD%E8%B1%A1%E6%A6%82%E5%BF%B5%E5%92%8C%E6%8A%80%E6%9C%AF/" class="md-nav__link">
+        强化学习抽象概念和技术
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_8" id="__nav_8_label" tabindex="0">
+           Bandits and Exploration:Exploitation Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+           Bandits and Exploration:Exploitation Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../%20Bandits%20and%20Exploration%3AExploitation%20Assignment/Assignment1/" class="md-nav__link">
+        Assignment 1: Bandits and Exploration/Exploitation
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_9" id="__nav_9_label" tabindex="0">
+          Optimal Policies with Dynamic Programming Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          Optimal Policies with Dynamic Programming Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Assignment 2: Optimal Policies with Dynamic Programming
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Assignment 2: Optimal Policies with Dynamic Programming
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gridworld-city" class="md-nav__link">
+    Gridworld City
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preliminaries" class="md-nav__link">
+    Preliminaries
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-policy-evaluation" class="md-nav__link">
+    Section 1: Policy Evaluation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-policy-iteration" class="md-nav__link">
+    Section 2: Policy Iteration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-value-iteration" class="md-nav__link">
+    Section 3: Value Iteration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapping-up" class="md-nav__link">
+    Wrapping Up
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_10" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_10" id="__nav_10_label" tabindex="0">
+          Q learning and Expected Sarsa Assignment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_10_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Q learning and Expected Sarsa Assignment
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Q-learning%20and%20Expected%20Sarsa%20Assignment/assignment/" class="md-nav__link">
+        Assignment 2 - Q-Learning and Expected Sarsa
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#gridworld-city" class="md-nav__link">
+    Gridworld City
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preliminaries" class="md-nav__link">
+    Preliminaries
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-1-policy-evaluation" class="md-nav__link">
+    Section 1: Policy Evaluation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-2-policy-iteration" class="md-nav__link">
+    Section 2: Policy Iteration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#section-3-value-iteration" class="md-nav__link">
+    Section 3: Value Iteration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wrapping-up" class="md-nav__link">
+    Wrapping Up
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="assignment-2-optimal-policies-with-dynamic-programming">Assignment 2: Optimal Policies with Dynamic Programming</h1>
+<p>Welcome to Assignment 2. This notebook will help you understand:
+- Policy Evaluation and Policy Improvement.
+- Value and Policy Iteration.
+- Bellman Equations.</p>
+<h2 id="gridworld-city">Gridworld City</h2>
+<p>Gridworld City, a thriving metropolis with a booming technology industry, has recently experienced an influx of grid-loving software engineers. Unfortunately, the city's street parking system, which charges a fixed rate, is struggling to keep up with the increased demand. To address this, the city council has decided to modify the pricing scheme to better promote social welfare. In general, the city considers social welfare higher when more parking is being used, the exception being that the city prefers that at least one spot is left unoccupied (so that it is available in case someone really needs it). The city council has created a Markov decision process (MDP) to model the demand for parking with a reward function that reflects its preferences. Now the city has hired you &mdash; an expert in dynamic programming &mdash; to help determine an optimal policy.</p>
+<h2 id="preliminaries">Preliminaries</h2>
+<p>You'll need two imports to complete this assigment:
+- numpy: The fundamental package for scientific computing with Python.
+- tools: A module containing an environment and a plotting function.</p>
+<p>There are also some other lines in the cell below that are used for grading and plotting &mdash; you needn't worry about them.</p>
+<p>In this notebook, all cells are locked except those that you are explicitly asked to modify. It is up to you to decide how to implement your solution in these cells, <strong>but please do not import other libraries</strong> &mdash; doing so will break the autograder.</p>
+<pre><code class="language-python">%matplotlib inline
+import numpy as np
+import tools
+import grader
+</code></pre>
+<pre><code>&lt;Figure size 432x288 with 0 Axes&gt;
+</code></pre>
+<p>In the city council's parking MDP, states are nonnegative integers indicating how many parking spaces are occupied, actions are nonnegative integers designating the price of street parking, the reward is a real value describing the city's preference for the situation, and time is discretized by hour. As might be expected, charging a high price is likely to decrease occupancy over the hour, while charging a low price is likely to increase it.</p>
+<p>For now, let's consider an environment with three parking spaces and three price points. Note that an environment with three parking spaces actually has four states &mdash; zero, one, two, or three spaces could be occupied.</p>
+<pre><code class="language-python"># ---------------
+# Discussion Cell
+# ---------------
+num_spaces = 3
+num_prices = 3
+env = tools.ParkingWorld(num_spaces, num_prices)
+V = np.zeros(num_spaces + 1)
+pi = np.ones((num_spaces + 1, num_prices)) / num_prices
+</code></pre>
+<p>The value function is a one-dimensional array where the $i$-th entry gives the value of $i$ spaces being occupied.</p>
+<pre><code class="language-python">V
+
+</code></pre>
+<pre><code>array([0., 0., 0., 0.])
+</code></pre>
+<p>We can represent the policy as a two-dimensional array where the $(i, j)$-th entry gives the probability of taking action $j$ in state $i$.</p>
+<pre><code class="language-python">pi
+</code></pre>
+<pre><code>array([[0.33333333, 0.33333333, 0.33333333],
+       [0.33333333, 0.33333333, 0.33333333],
+       [0.33333333, 0.33333333, 0.33333333],
+       [0.33333333, 0.33333333, 0.33333333]])
+</code></pre>
+<pre><code class="language-python">pi[0] = [0.75, 0.11, 0.14]
+
+for s, pi_s in enumerate(pi):
+    for a, p in enumerate(pi_s):
+        print(f'pi(A={a}|S={s}) = {p.round(2)}    ', end='')
+    print()
+</code></pre>
+<pre><code>pi(A=0|S=0) = 0.75    pi(A=1|S=0) = 0.11    pi(A=2|S=0) = 0.14    
+pi(A=0|S=1) = 0.33    pi(A=1|S=1) = 0.33    pi(A=2|S=1) = 0.33    
+pi(A=0|S=2) = 0.33    pi(A=1|S=2) = 0.33    pi(A=2|S=2) = 0.33    
+pi(A=0|S=3) = 0.33    pi(A=1|S=3) = 0.33    pi(A=2|S=3) = 0.33
+</code></pre>
+<pre><code class="language-python">V[0] = 1
+
+tools.plot(V, pi)
+</code></pre>
+<p><img alt="png" src="../output_11_0.png" /></p>
+<p>We can visualize a value function and policy with the <code>plot</code> function in the <code>tools</code> module. On the left, the value function is displayed as a barplot. State zero has an expected return of ten, while the other states have an expected return of zero. On the right, the policy is displayed on a two-dimensional grid. Each vertical strip gives the policy at the labeled state. In state zero, action zero is the darkest because the agent's policy makes this choice with the highest probability. In the other states the agent has the equiprobable policy, so the vertical strips are colored uniformly.</p>
+<p>You can access the state space and the action set as attributes of the environment.</p>
+<pre><code class="language-python">env.S
+</code></pre>
+<pre><code>[0, 1, 2, 3]
+</code></pre>
+<pre><code class="language-python">env.A
+</code></pre>
+<pre><code>[0, 1, 2]
+</code></pre>
+<p>You will need to use the environment's <code>transitions</code> method to complete this assignment. The method takes a state and an action and returns a 2-dimensional array, where the entry at $(i, 0)$ is the reward for transitioning to state $i$ from the current state and the entry at $(i, 1)$ is the conditional probability of transitioning to state $i$ given the current state and action.</p>
+<pre><code class="language-python">state = 3
+action = 1
+transitions = env.transitions(state, action)
+transitions
+</code></pre>
+<pre><code>array([[1.        , 0.12390437],
+       [2.        , 0.15133714],
+       [3.        , 0.1848436 ],
+       [2.        , 0.53991488]])
+</code></pre>
+<pre><code class="language-python">for sp, (r, p) in enumerate(transitions):
+    print(f'p(S\'={sp}, R={r} | S={state}, A={action}) = {p.round(2)}')
+</code></pre>
+<pre><code>p(S'=0, R=1.0 | S=3, A=1) = 0.12
+p(S'=1, R=2.0 | S=3, A=1) = 0.15
+p(S'=2, R=3.0 | S=3, A=1) = 0.18
+p(S'=3, R=2.0 | S=3, A=1) = 0.54
+</code></pre>
+<h2 id="section-1-policy-evaluation">Section 1: Policy Evaluation</h2>
+<p>You're now ready to begin the assignment! First, the city council would like you to evaluate the quality of the existing pricing scheme. Policy evaluation works by iteratively applying the Bellman equation for $v_{\pi}$ to a working value function, as an update rule, as shown below.</p>
+<p>$$\large v(s) \leftarrow \sum_a \pi(a | s) \sum_{s', r} p(s', r | s, a)[r + \gamma v(s')]$$
+This update can either occur "in-place" (i.e. the update rule is sequentially applied to each state) or with "two-arrays" (i.e. the update rule is simultaneously applied to each state). Both versions converge to $v_{\pi}$ but the in-place version usually converges faster. <strong>In this assignment, we will be implementing all update rules in-place</strong>, as is done in the pseudocode of chapter 4 of the textbook. </p>
+<p>We have written an outline of the policy evaluation algorithm described in chapter 4.1 of the textbook. It is left to you to fill in the <code>bellman_update</code> function to complete the algorithm.</p>
+<pre><code class="language-python"># lock
+def evaluate_policy(env, V, pi, gamma, theta):
+    delta = float('inf')
+    while delta &gt; theta:
+        delta = 0
+        for s in env.S:
+            v = V[s]
+            bellman_update(env, V, pi, s, gamma)
+            delta = max(delta, abs(v - V[s]))
+
+    return V
+</code></pre>
+<pre><code class="language-python"># -----------
+# Graded Cell
+# -----------
+def bellman_update(env, V, pi, s, gamma):
+    &quot;&quot;&quot;Mutate ``V`` according to the Bellman update equation.&quot;&quot;&quot;
+    # YOUR CODE HERE
+    action_values = []
+    for a in range(len(env.A)):
+        next_state_value = [prob * (reward + gamma * V[next_s]) for next_s, (reward,prob) in enumerate(env.transitions(s,a))]
+        action_value = pi[s][a] * sum(next_state_value)
+        action_values.append(action_value)
+    V[s] = sum(action_values)
+
+</code></pre>
+<p>The cell below uses the policy evaluation algorithm to evaluate the city's policy, which charges a constant price of one.</p>
+<pre><code class="language-python"># --------------
+# Debugging Cell
+# --------------
+# Feel free to make any changes to this cell to debug your code
+
+# set up test environment
+num_spaces = 10
+num_prices = 4
+env = tools.ParkingWorld(num_spaces, num_prices)
+
+# build test policy
+city_policy = np.zeros((num_spaces + 1, num_prices))
+city_policy[:, 1] = 1
+
+gamma = 0.9
+theta = 0.1
+
+V = np.zeros(num_spaces + 1)
+V = evaluate_policy(env, V, city_policy, gamma, theta)
+
+print(V)
+</code></pre>
+<pre><code>[80.04173399 81.65532303 83.37394007 85.12975566 86.87174913 88.55589131
+ 90.14020422 91.58180605 92.81929841 93.78915889 87.77792991]
+</code></pre>
+<pre><code class="language-python"># -----------
+# Tested Cell
+# -----------
+# The contents of the cell will be tested by the autograder.
+# If they do not pass here, they will not pass there.
+
+# set up test environment
+num_spaces = 10
+num_prices = 4
+env = tools.ParkingWorld(num_spaces, num_prices)
+
+# build test policy
+city_policy = np.zeros((num_spaces + 1, num_prices))
+city_policy[:, 1] = 1
+
+gamma = 0.9
+theta = 0.1
+
+V = np.zeros(num_spaces + 1)
+V = evaluate_policy(env, V, city_policy, gamma, theta)
+
+# test the value function
+answer = [80.04, 81.65, 83.37, 85.12, 86.87, 88.55, 90.14, 91.58, 92.81, 93.78, 87.77]
+
+# make sure the value function is within 2 decimal places of the correct answer
+assert grader.near(V, answer, 1e-2)
+</code></pre>
+<p>You can use the <code>plot</code> function to visualize the final value function and policy.</p>
+<pre><code class="language-python"># lock
+tools.plot(V, city_policy)
+</code></pre>
+<p><img alt="png" src="../output_26_0.png" /></p>
+<p>Observe that the value function qualitatively resembles the city council's preferences &mdash; it monotonically increases as more parking is used, until there is no parking left, in which case the value is lower. Because of the relatively simple reward function (more reward is accrued when many but not all parking spots are taken and less reward is accrued when few or all parking spots are taken) and the highly stochastic dynamics function (each state has positive probability of being reached each time step) the value functions of most policies will qualitatively resemble this graph. However, depending on the intelligence of the policy, the scale of the graph will differ. In other words, better policies will increase the expected return at every state rather than changing the relative desirability of the states. Intuitively, the value of a less desirable state can be increased by making it less likely to remain in a less desirable state. Similarly, the value of a more desirable state can be increased by making it more likely to remain in a more desirable state. That is to say, good policies are policies that spend more time in desirable states and less time in undesirable states. As we will see in this assignment, such a steady state distribution is achieved by setting the price to be low in low occupancy states (so that the occupancy will increase) and setting the price high when occupancy is high (so that full occupancy will be avoided).</p>
+<h2 id="section-2-policy-iteration">Section 2: Policy Iteration</h2>
+<p>Now the city council would like you to compute a more efficient policy using policy iteration. Policy iteration works by alternating between evaluating the existing policy and making the policy greedy with respect to the existing value function. We have written an outline of the policy iteration algorithm described in chapter 4.3 of the textbook. We will make use of the policy evaluation algorithm you completed in section 1. It is left to you to fill in the <code>q_greedify_policy</code> function, such that it modifies the policy at $s$ to be greedy with respect to the q-values at $s$, to complete the policy improvement algorithm.</p>
+<pre><code class="language-python">def improve_policy(env, V, pi, gamma):
+    policy_stable = True
+    for s in env.S:
+        old = pi[s].copy()
+        q_greedify_policy(env, V, pi, s, gamma)
+
+        if not np.array_equal(pi[s], old):
+            policy_stable = False
+
+    return pi, policy_stable
+
+def policy_iteration(env, gamma, theta):
+    V = np.zeros(len(env.S))
+    pi = np.ones((len(env.S), len(env.A))) / len(env.A)
+    policy_stable = False
+
+    while not policy_stable:
+        V = evaluate_policy(env, V, pi, gamma, theta)
+        pi, policy_stable = improve_policy(env, V, pi, gamma)
+
+    return V, pi
+</code></pre>
+<pre><code class="language-python"># -----------
+# Graded Cell
+# -----------
+def q_greedify_policy(env, V, pi, s, gamma):
+    &quot;&quot;&quot;Mutate ``pi`` to be greedy with respect to the q-values induced by ``V``.&quot;&quot;&quot;
+    # YOUR CODE HERE
+    action_values = {}
+    for a in range(len(env.A)):
+        action_value = [prob * (reward + gamma * V[next_s]) for next_s, (reward, prob) in enumerate(env.transitions(s,a))]
+        action_values[a] = sum(action_value)
+    max_qvalue_action = max(action_values,key=action_values.get)
+    for a in range(len(env.A)):
+        if a == max_qvalue_action:
+            pi[s][a] = 1
+        else:
+            pi[s][a] = 0
+
+
+</code></pre>
+<pre><code class="language-python"># --------------
+# Debugging Cell
+# --------------
+# Feel free to make any changes to this cell to debug your code
+
+gamma = 0.9
+theta = 0.1
+env = tools.ParkingWorld(num_spaces=6, num_prices=4)
+
+V = np.array([7, 6, 5, 4, 3, 2, 1])
+pi = np.ones((7, 4)) / 4
+
+new_pi, stable = improve_policy(env, V, pi, gamma)
+
+# expect first call to greedify policy
+expected_pi = np.array([
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+])
+assert np.all(new_pi == expected_pi)
+assert stable == False
+
+# the value function has not changed, so the greedy policy should not change
+new_pi, stable = improve_policy(env, V, new_pi, gamma)
+
+assert np.all(new_pi == expected_pi)
+assert stable == True
+</code></pre>
+<pre><code class="language-python"># -----------
+# Tested Cell
+# -----------
+# The contents of the cell will be tested by the autograder.
+# If they do not pass here, they will not pass there.
+gamma = 0.9
+theta = 0.1
+env = tools.ParkingWorld(num_spaces=10, num_prices=4)
+
+V, pi = policy_iteration(env, gamma, theta)
+
+V_answer = [81.60, 83.28, 85.03, 86.79, 88.51, 90.16, 91.70, 93.08, 94.25, 95.25, 89.45]
+pi_answer = [
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [1, 0, 0, 0],
+    [0, 0, 0, 1],
+    [0, 0, 0, 1],
+]
+
+# make sure value function is within 2 decimal places of answer
+assert grader.near(V, V_answer, 1e-2)
+
+# make sure policy is exactly correct
+assert np.all(pi == pi_answer)
+</code></pre>
+<p>When you are ready to test the policy iteration algorithm, run the cell below.</p>
+<pre><code class="language-python">env = tools.ParkingWorld(num_spaces=10, num_prices=4)
+gamma = 0.9
+theta = 0.1
+V, pi = policy_iteration(env, gamma, theta)
+</code></pre>
+<p>You can use the <code>plot</code> function to visualize the final value function and policy.</p>
+<pre><code class="language-python">tools.plot(V, pi)
+</code></pre>
+<p><img alt="png" src="../output_36_0.png" /></p>
+<p>You can check the value function (rounded to one decimal place) and policy against the answer below:<br>
+State $\quad\quad$    Value $\quad\quad$ Action<br>
+0 $\quad\quad\quad\;$        81.6 $\quad\quad\;$ 0<br>
+1 $\quad\quad\quad\;$        83.3 $\quad\quad\;$ 0<br>
+2 $\quad\quad\quad\;$        85.0 $\quad\quad\;$ 0<br>
+3 $\quad\quad\quad\;$        86.8 $\quad\quad\;$ 0<br>
+4 $\quad\quad\quad\;$        88.5 $\quad\quad\;$ 0<br>
+5 $\quad\quad\quad\;$        90.2 $\quad\quad\;$ 0<br>
+6 $\quad\quad\quad\;$        91.7 $\quad\quad\;$ 0<br>
+7 $\quad\quad\quad\;$        93.1 $\quad\quad\;$ 0<br>
+8 $\quad\quad\quad\;$        94.3 $\quad\quad\;$ 0<br>
+9 $\quad\quad\quad\;$        95.3 $\quad\quad\;$ 3<br>
+10 $\quad\quad\;\;\,\,$      89.5 $\quad\quad\;$ 3<br></p>
+<h2 id="section-3-value-iteration">Section 3: Value Iteration</h2>
+<p>The city has also heard about value iteration and would like you to implement it. Value iteration works by iteratively applying the Bellman optimality equation for $v_{\ast}$ to a working value function, as an update rule, as shown below.</p>
+<p>$$\large v(s) \leftarrow \max_a \sum_{s', r} p(s', r | s, a)[r + \gamma v(s')]$$
+We have written an outline of the value iteration algorithm described in chapter 4.4 of the textbook. It is left to you to fill in the <code>bellman_optimality_update</code> function to complete the value iteration algorithm.</p>
+<pre><code class="language-python">def value_iteration(env, gamma, theta):
+    V = np.zeros(len(env.S))
+    while True:
+        delta = 0
+        for s in env.S:
+            v = V[s]
+            bellman_optimality_update(env, V, s, gamma)
+            delta = max(delta, abs(v - V[s]))
+        if delta &lt; theta:
+            break
+    pi = np.ones((len(env.S), len(env.A))) / len(env.A)
+    for s in env.S:
+        q_greedify_policy(env, V, pi, s, gamma)
+    return V, pi
+</code></pre>
+<pre><code class="language-python"># -----------
+# Graded Cell
+# -----------
+def bellman_optimality_update(env, V, s, gamma):
+    &quot;&quot;&quot;Mutate ``V`` according to the Bellman optimality update equation.&quot;&quot;&quot;
+    # YOUR CODE HERE
+    # 理解成用bellman最优公式更新就好了
+    # 选择一个最优a
+    action_values = []
+    for a in range(len(env.A)):
+        next_state_value = [prob * (reward + gamma * V[next_s]) for next_s, (reward, prob) in enumerate(env.transitions(s,a))]
+        action_value = sum(next_state_value)
+        action_values.append(action_value)
+    V[s] = max(action_values)
+
+</code></pre>
+<pre><code class="language-python"># --------------
+# Debugging Cell
+# --------------
+# Feel free to make any changes to this cell to debug your code
+
+gamma = 0.9
+env = tools.ParkingWorld(num_spaces=6, num_prices=4)
+
+V = np.array([7, 6, 5, 4, 3, 2, 1])
+
+# only state 0 updated
+bellman_optimality_update(env, V, 0, gamma)
+assert list(V) == [5, 6, 5, 4, 3, 2, 1]
+
+# only state 2 updated
+bellman_optimality_update(env, V, 2, gamma)
+assert list(V) == [5, 6, 7, 4, 3, 2, 1]
+</code></pre>
+<pre><code class="language-python"># -----------
+# Tested Cell
+# -----------
+# The contents of the cell will be tested by the autograder.
+# If they do not pass here, they will not pass there.
+gamma = 0.9
+env = tools.ParkingWorld(num_spaces=10, num_prices=4)
+
+V = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11])
+
+for _ in range(10):
+    for s in env.S:
+        bellman_optimality_update(env, V, s, gamma)
+
+# make sure value function is exactly correct
+answer = [61, 63, 65, 67, 69, 71, 72, 74, 75, 76, 71]
+assert np.all(V == answer)
+</code></pre>
+<p>When you are ready to test the value iteration algorithm, run the cell below.</p>
+<pre><code class="language-python">env = tools.ParkingWorld(num_spaces=10, num_prices=4)
+gamma = 0.9
+theta = 0.1
+V, pi = value_iteration(env, gamma, theta)
+</code></pre>
+<p>You can use the <code>plot</code> function to visualize the final value function and policy.</p>
+<pre><code class="language-python">tools.plot(V, pi)
+</code></pre>
+<p><img alt="png" src="../output_46_0.png" /></p>
+<p>You can check your value function (rounded to one decimal place) and policy against the answer below:<br>
+State $\quad\quad$    Value $\quad\quad$ Action<br>
+0 $\quad\quad\quad\;$        81.6 $\quad\quad\;$ 0<br>
+1 $\quad\quad\quad\;$        83.3 $\quad\quad\;$ 0<br>
+2 $\quad\quad\quad\;$        85.0 $\quad\quad\;$ 0<br>
+3 $\quad\quad\quad\;$        86.8 $\quad\quad\;$ 0<br>
+4 $\quad\quad\quad\;$        88.5 $\quad\quad\;$ 0<br>
+5 $\quad\quad\quad\;$        90.2 $\quad\quad\;$ 0<br>
+6 $\quad\quad\quad\;$        91.7 $\quad\quad\;$ 0<br>
+7 $\quad\quad\quad\;$        93.1 $\quad\quad\;$ 0<br>
+8 $\quad\quad\quad\;$        94.3 $\quad\quad\;$ 0<br>
+9 $\quad\quad\quad\;$        95.3 $\quad\quad\;$ 3<br>
+10 $\quad\quad\;\;\,\,$      89.5 $\quad\quad\;$ 3<br></p>
+<p>In the value iteration algorithm above, a policy is not explicitly maintained until the value function has converged. Below, we have written an identically behaving value iteration algorithm that maintains an updated policy. Writing value iteration in this form makes its relationship to policy iteration more evident. Policy iteration alternates between doing complete greedifications and complete evaluations. On the other hand, value iteration alternates between doing local greedifications and local evaluations. </p>
+<pre><code class="language-python">def value_iteration2(env, gamma, theta):
+    V = np.zeros(len(env.S))
+    pi = np.ones((len(env.S), len(env.A))) / len(env.A)
+    while True:
+        delta = 0
+        for s in env.S:
+            v = V[s]
+            q_greedify_policy(env, V, pi, s, gamma)
+            bellman_update(env, V, pi, s, gamma)
+            delta = max(delta, abs(v - V[s]))
+        if delta &lt; theta:
+            break
+    return V, pi
+</code></pre>
+<p>You can try the second value iteration algorithm by running the cell below.</p>
+<pre><code class="language-python">env = tools.ParkingWorld(num_spaces=10, num_prices=4)
+gamma = 0.9
+theta = 0.1
+V, pi = value_iteration2(env, gamma, theta)
+tools.plot(V, pi)
+</code></pre>
+<p><img alt="png" src="../output_51_0.png" /></p>
+<h2 id="wrapping-up">Wrapping Up</h2>
+<p>Congratulations, you've completed assignment 2! In this assignment, we investigated policy evaluation and policy improvement, policy iteration and value iteration, and Bellman updates. Gridworld City thanks you for your service!</p>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": [], "search": "../../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.fac441b0.min.js"></script>
+      
+    
+  </body>
+</html>
